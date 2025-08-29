@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Business Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #3d5ad9 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .business-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .business-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 4px solid #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .name {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .bio {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .social-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-links li {
+            margin: 5px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .social-links a:active {
+            transform: translateY(0);
+        }
+
+       
+
+        @media (max-width: 500px) {
+            .business-card {
+                padding: 30px 20px;
+            }
+            
+            .name {
+                font-size: 1.8em;
+            }
+            
+            .title {
+                font-size: 1.1em;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-links a {
+                width: 200px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="business-card">
+        
+        <img src="photo1.jpeg" 
+             alt="photo" 
+             class="profile-photo">
+
+        <!-- Name (Heading) -->
+        <h1 class="name">Shriyanshi Dangwal</h1>
+
+        <!-- Professional Title -->
+        <h2 class="title">Web Developer</h2>
+
+        <!-- Bio/Description -->
+        <p class="bio">
+            Computer Science student passionate about Web Development. Skilled in HTML, CSS, and Java with a growing interest in full-stack development.
+        </p>
+
+        <!-- Social Media Links -->
+        <ul class="social-links">
+            <li>
+                <a href="https://www.linkedin.com/in/shriyanshi-dangwal-632785290/" target="_blank" rel="noopener">
+                    LinkedIn
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/shree692" target="_blank" rel="noopener">
+                    
+                    GitHub
+                </a>
+            </li>
+            <li>
+                <a href="mailto:shriyanshidangwal526@gmail.com">
+                    
+                    Email
+                </a>
+            </li>
+            <li>
+                <a href="https://www.hackerrank.com/profile/shriyanshidangw1" target="_blank" rel="noopener">
+        
+                    HackerRank
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
