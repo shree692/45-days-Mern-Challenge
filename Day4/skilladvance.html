@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skills</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --glass: rgba(255,255,255,0.04);
+      --accent1: linear-gradient(135deg,#7dd3fc 0%,#60a5fa 50%,#a78bfa 100%);
+      --glass-border: rgba(255,255,255,0.06);
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,0.12), transparent),
+                  radial-gradient(800px 400px at 90% 90%, rgba(56,189,248,0.06), transparent),
+                  var(--bg);
+      padding:32px;
+    }
+
+    .wrap{width:100%; max-width:980px}
+
+    header{display:flex; gap:16px; align-items:center; margin-bottom:18px}
+    .logo{
+      width:64px; height:64px; border-radius:12px; background:var(--accent1); display:flex; align-items:center; justify-content:center; box-shadow: 0 6px 20px rgba(10,10,20,0.5);
+      font-weight:700; color:#041024; font-size:18px
+    }
+    h1{font-size:20px; margin:0; color:#e6eef8}
+    p.lead{margin:0; color:#a7b7c9; font-size:13px}
+
+    .grid{display:grid; grid-template-columns: 1fr 360px; gap:20px}
+
+    /* main card */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid var(--glass-border); padding:18px; border-radius:14px; box-shadow: 0 8px 30px rgba(2,6,23,0.6)}
+
+    .controls{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+    .controls select, .controls button, .controls input{padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.05); background:transparent; color:#dce9ff}
+    .controls button{cursor:pointer}
+
+    ul.skills{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+    li.skill{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; border-radius:10px; background:linear-gradient(90deg, rgba(255,255,255,0.012), transparent); border:1px solid rgba(255,255,255,0.02)}
+    .skill .left{display:flex; align-items:center; gap:12px}
+    .badge{width:46px; height:46px; border-radius:8px; background:var(--glass); display:grid; place-items:center; font-weight:700; color:#e6eef8}
+    .meta{display:flex; flex-direction:column}
+    .meta b{font-size:14px; color:#f1f7ff}
+    .meta span{font-size:12px; color:#9fb0c9}
+
+    .actions{display:flex; gap:8px}
+    .chip{padding:6px 8px; border-radius:8px; font-size:12px; border:1px solid rgba(255,255,255,0.03); cursor:pointer}
+
+    /* sidebar (form) */
+    .side{display:flex; flex-direction:column; gap:12px}
+    label{font-size:13px; color:#9fb0c9}
+    input[type=text], select[name=prof], input[type=number]{width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:#dfeeff}
+    .form-row{display:flex; gap:8px}
+    .btn-primary{background:var(--accent1); border:none; color:#041024; padding:10px 12px; border-radius:10px; cursor:pointer; font-weight:600}
+    .small{font-size:12px; color:#9fb0c9}
+
+    footer{margin-top:12px; text-align:center; color:#8397ad; font-size:12px}
+
+    /* responsive */
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr;}
+      .side{order:2}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">SK</div>
+      <div>
+        <h1>Skills Set</h1>
+ 
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="controls">
+          <select id="filterProf" title="Filter by proficiency">
+            <option value="all">All Proficiencies</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Beginner">Beginner</option>
+          </select>
+
+          <select id="sortBy">
+            <option value="none">No Sort</option>
+            <option value="name-asc">Name A → Z</option>
+            <option value="name-desc">Name Z → A</option>
+            <option value="prof">Proficiency (Adv → Int → Beg)</option>
+          </select>
+
+          <button id="btnShowFormatted">Show Formatted Array (console)</button>
+          <button id="btnReset">Reset</button>
+        </div>
+
+        <ul id="skillsList" class="skills" aria-live="polite">
+          <!-- JS will populate -->
+        </ul>
+
+        <footer>Try adding skills </footer>
+      </div>
+
+      <aside class="side">
+        <div class="card">
+          <label>Add new skill</label>
+          <input id="inpName" type="text" placeholder="Skill name (e.g. React)" />
+          <select id="inpProf" name="prof">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate" selected>Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+          <div class="form-row">
+            <input id="inpYears" type="number" step="0.5" placeholder="Years (e.g. 1.5)" />
+            <button id="btnAdd" class="btn-primary">Add Skill</button>
+          </div>
+         
+        </div>
+
+        <div class="card">
+          <label>Quick actions</label>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+            <div style="display:flex;gap:8px">
+              <button class="chip" id="addReact">Add React (Intermediate)</button>
+              <button class="chip" id="addNode">Add Node.js (Intermediate)</button>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="chip" id="showAdvanced">Show Advanced</button>
+              <button class="chip" id="countLevels">Count Levels</button>
+            </div>
+          </div>
+          <div id="quickOutput" class="small" style="margin-top:10px"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Initial skills array (challenge sample + extras)
+    let skills = [
+      { name: "HTML", proficiency: "Intermediate", years: 2 },
+      { name: "CSS", proficiency: "Advanced", years: 3 },
+      { name: "JavaScript", proficiency: "Beginner", years: 0.5 }
+    ];
+
+    // Utility: format for display and for console
+    function formatSkill(s){
+      return `${s.name} (${s.proficiency})`;
+    }
+
+    function render(list){
+      const ul = document.getElementById('skillsList');
+      ul.innerHTML = '';
+      list.forEach(s => {
+        const li = document.createElement('li'); li.className = 'skill';
+        li.innerHTML = `
+          <div class="left">
+            <div class="badge">${s.name.slice(0,2).toUpperCase()}</div>
+            <div class="meta"><b>${s.name}</b><span>${s.proficiency} • ${s.years ?? '—'} yrs</span></div>
+          </div>
+          <div class="actions">
+            <button class="chip" onclick="promote('${s.name.replace(/'/g,'\'')}')">Promote</button>
+            <button class="chip" onclick="removeSkill('${s.name.replace(/'/g,'\'')}')">Remove</button>
+          </div>`;
+        ul.appendChild(li);
+      });
+    }
+
+    // initial render
+    render(skills);
+
+    // controls
+    document.getElementById('btnShowFormatted').addEventListener('click', ()=>{
+      const out = skills.map(formatSkill);
+      console.log(out);
+      alert('Formatted array logged to console. (Open DevTools → Console)');
+    });
+
+    document.getElementById('filterProf').addEventListener('change', ()=>{ applyFilters(); });
+    document.getElementById('sortBy').addEventListener('change', ()=>{ applyFilters(); });
+
+    document.getElementById('btnReset').addEventListener('click', ()=>{
+      skills = [
+        { name: "HTML", proficiency: "Intermediate", years: 2 },
+        { name: "CSS", proficiency: "Advanced", years: 3 },
+        { name: "JavaScript", proficiency: "Beginner", years: 0.5 }
+      ];
+      document.getElementById('filterProf').value = 'all';
+      document.getElementById('sortBy').value = 'none';
+      render(skills);
+      document.getElementById('quickOutput').textContent = '';
+    });
+
+    function applyFilters(){
+      const prof = document.getElementById('filterProf').value;
+      const sort = document.getElementById('sortBy').value;
+      let list = skills.slice();
+      if(prof !== 'all') list = list.filter(s => s.proficiency === prof);
+
+      if(sort === 'name-asc') list.sort((a,b)=> a.name.localeCompare(b.name));
+      if(sort === 'name-desc') list.sort((a,b)=> b.name.localeCompare(a.name));
+      if(sort === 'prof'){
+        const order = { 'Advanced': 0, 'Intermediate': 1, 'Beginner': 2 };
+        list.sort((a,b)=> (order[a.proficiency]||9) - (order[b.proficiency]||9) || a.name.localeCompare(b.name));
+      }
+
+      render(list);
+    }
+
+    // add skill
+    document.getElementById('btnAdd').addEventListener('click', ()=>{
+      const name = (document.getElementById('inpName').value || '').trim();
+      const prof = document.getElementById('inpProf').value;
+      const yrs = parseFloat(document.getElementById('inpYears').value) || 0;
+      if(!name){ alert('Please enter a skill name'); return; }
+      skills.push({ name, proficiency: prof, years: yrs });
+      document.getElementById('inpName').value=''; document.getElementById('inpYears').value='';
+      applyFilters();
+    });
+
+    // quick actions
+    document.getElementById('addReact').addEventListener('click', ()=>{ skills.push({name:'React', proficiency:'Intermediate', years:1}); applyFilters(); });
+    document.getElementById('addNode').addEventListener('click', ()=>{ skills.push({name:'Node.js', proficiency:'Intermediate', years:1}); applyFilters(); });
+
+    document.getElementById('showAdvanced').addEventListener('click', ()=>{
+      const advanced = skills.filter(s=>s.proficiency==='Advanced').map(formatSkill);
+      document.getElementById('quickOutput').textContent = advanced.join(' | ') || 'No advanced skills';
+    });
+
+    document.getElementById('countLevels').addEventListener('click', ()=>{
+      const counts = skills.reduce((acc,s)=>{ acc[s.proficiency] = (acc[s.proficiency]||0)+1; return acc; },{});
+      document.getElementById('quickOutput').textContent = JSON.stringify(counts);
+    });
+
+    // promote skill (simple action to change level)
+    function promote(name){
+      const idx = skills.findIndex(s=>s.name === name);
+      if(idx === -1) return;
+      const order = ['Beginner','Intermediate','Advanced'];
+      const cur = skills[idx].proficiency || 'Beginner';
+      const next = order[Math.min(order.indexOf(cur)+1, order.length-1)];
+      skills[idx].proficiency = next;
+      applyFilters();
+    }
+
+    function removeSkill(name){
+      skills = skills.filter(s=>s.name !== name);
+      applyFilters();
+    }
+
+    // expose small functions to global for onclick in template (safe for demo)
+    window.promote = promote; window.removeSkill = removeSkill;
+
+    // initial console log of formatted array (answer to challenge)
+    console.log('Formatted output (sample):', skills.map(formatSkill));
+  </script>
+</body>
+</html>
