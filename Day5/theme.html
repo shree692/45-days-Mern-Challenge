@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Business Card</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+     
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-image: url('Blue Night Sky Cute Whale Desktop Wallpaper (1).png');
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    .business-card {
+      background: rgba(255, 255, 255, 0.789);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s, color 0.4s;
+      
+    }
+
+    .business-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #3a0ca3, #4361ee, #7209b7);
+    }
+
+    .profile-photo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px;
+      border: 4px solid #4361ee;
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.5);
+    }
+
+    .name {
+      font-size: 2.3em;
+      font-weight: bold;
+      background: linear-gradient(135deg, #3a0ca3, #4361ee, #7209b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .title {
+      font-size: 1.3em;
+      color: #555;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .bio {
+      font-size: 1em;
+      line-height: 1.6;
+      color: #444;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .social-links {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-links li {
+      margin: 5px;
+    }
+
+    .social-links a {
+      padding: 10px 15px;
+      background: linear-gradient(135deg, #3a0ca3, #4361ee);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 0.9em;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+    }
+
+    .social-links a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
+    }
+
+    /* Toggle Button */
+    #theme-toggle {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #7209b7, #4361ee);
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    #theme-toggle:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Dark Mode */
+    .dark-mode {
+      color: #fff;
+    }
+    .dark-mode .business-card {
+      background: #2b2b2bcb;
+      color: #eee;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .dark-mode .bio { color: #ccc; }
+    .dark-mode .title { color: #aaa; }
+    .dark-mode .social-links a {
+      background: linear-gradient(135deg, #ffffff, #ffffff);
+      box-shadow: 0 4px 15px rgba(205, 201, 201, 0.5);
+      color: #2b2b2b;
+    }
+   .dark-mode .name {
+  background: none;   /* gradient hata diya */
+  color: #fff;        /* white text */
+  -webkit-text-fill-color: #fff; /* for Safari/Chrome */
+}
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      .business-card { padding: 25px 20px; }
+      .name { font-size: 1.8em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="business-card">
+    
+    <img src="profile.jpeg"
+         alt="me"
+         class="profile-photo">
+
+    <h1 class="name">Shriyanshi Dangwal</h1>
+    <h2 class="title">Web Developer</h2>
+
+    <p class="bio">
+      Computer Science student passionate about Web Development. Skilled in HTML, CSS, and Java with a growing interest in full-stack development.
+    </p>
+
+    <ul class="social-links">
+      <li><a href="https://www.linkedin.com/in/shriyanshi-dangwal-632785290/" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com/shree692" target="_blank">GitHub</a></li>
+      <li><a href="mailto:shriyanshidangwal526@gmail.com">Email</a></li>
+      <li><a href="https://www.hackerrank.com/profile/shriyanshidangw1" target="_blank">HackerRank</a></li>
+    </ul>
+
+    <button id="theme-toggle">🌙</button>
+  </div>
+
+  <script>
+    const themeButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    themeButton.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const isDark = body.classList.contains('dark-mode');
+      themeButton.textContent = isDark ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>
