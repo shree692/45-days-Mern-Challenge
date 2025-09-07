@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspirational Quote Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <div class="container">
+        <i class="fas fa-quote-left quote-icon left"></i>
+        <i class="fas fa-quote-right quote-icon right"></i>
+        
+        <h1>Inspirational Quotes</h1>
+        
+        <div class="quote-container">
+            <div class="loading" id="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            
+            <div class="error" id="error">
+                Failed to load quote. Please try again.
+            </div>
+            
+            <p class="quote-text" id="quote-text">Loading quote...</p>
+            <p class="quote-author" id="quote-author"></p>
+        </div>
+        
+        <div class="buttons">
+            <button id="new-quote-btn">
+                <i class="fas fa-sync-alt"></i> New Quote
+            </button>
+            <button id="copy-btn">
+                <i class="fas fa-copy"></i> Copy
+            </button>
+            <button id="linkedin-btn">
+                <i class="fab fa-linkedin"></i> Share to LinkedIn
+            </button>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
