@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; background: #f4f6f8; color: #333; margin:0; padding:0;}
+    .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .article { background: #fff; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .article h3 { margin-bottom: 10px; }
+    .article p { margin-bottom: 10px; }
+    .toggle-btn { cursor: pointer; color: #007BFF; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Welcome, <span id="username">User</span>!</h1>
+  <p>Login Streak: <span id="streak">3 days</span></p>
+  <h2>Recommended Articles</h2>
+  <ul id="articleList"></ul>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const token = localStorage.getItem('token');
+  if(!token) window.location.href = '/login.html';
+
+  // Fake articles
+  const articles = [
+    { _id: '1', title: 'Mastering HTML5', content: 'HTML is the backbone of every website. Learn tags, semantic HTML, forms, tables, and structure web pages properly for better accessibility and SEO.Semantic HTML is another key aspect. It involves using HTML elements according to their meaning, rather than merely for visual formatting. Tags such as header, footer, article, and section provide context to the content and help search engines and assistive technologies understand the structure of a webpage. Mastering semantic HTML not only improves accessibility but also enhances search engine optimization (SEO), making your website more discoverable.Forms and tables are also integral to HTML mastery. Forms, created using form, input, textarea, and button tags, allow users to interact with websites by submitting data. Tables, built with table, tr, td, and th, organize information in rows and columns. Proper understanding of these elements ensures that data is presented clearly and collected efficiently.' },
+    { _id: '2', title: 'CSS Grid and Flexbox', content: 'CSS Flexbox is a powerful layout module that makes it easy to design flexible and responsive web layouts. By applying display: flex to a container, its child elements automatically become flexible items that can adjust their size and position dynamically. Flexbox provides properties like justify-content, align-items, and flex-wrap to control alignment, spacing, and wrapping of elements. Unlike traditional layouts using floats or positioning, Flexbox allows developers to create complex arrangements with minimal code. Mastering Flexbox is essential for modern web design, ensuring that websites look great across different screen sizes and devices.' },
+    { _id: '3', title: 'JavaScript', content: 'JavaScript is a versatile, high-level programming language that brings interactivity to websites. It allows developers to manipulate HTML and CSS dynamically, handle events like clicks or form submissions, and communicate with servers using APIs. JavaScript supports both object-oriented and functional programming, making it flexible for different project needs. Key concepts include variables, functions, loops, and conditional statements. Modern JS also includes ES6+ features like arrow functions, promises, and modules. Mastering JavaScript is essential for web development, enabling developers to create responsive, interactive, and user-friendly web applications that run smoothly across browsers.' },
+    { _id: '4', title: 'React for Beginners', content: 'React is a popular JavaScript library developed by Facebook for building dynamic and interactive user interfaces. It allows developers to create reusable components, making complex UIs easier to manage and maintain. React uses a virtual DOM to efficiently update only the parts of a webpage that change, improving performance. Key concepts include components, props, state, and lifecycle methods, which help manage data and UI behavior. React also supports hooks for cleaner and more functional code. Mastering React enables developers to build scalable, responsive, and high-performing web applications, making it a cornerstone of modern frontend development.' }
+  ];
+
+  const articleList = document.getElementById('articleList');
+   let index = 0;
+  function renderArticle(article){
+    const li = document.createElement('li');
+    li.className = 'article';
+    const preview = article.content.split(' ').slice(0,15).join(' ') + '...';
+    li.innerHTML = `
+      <h3>${article.title}</h3>
+      <p class="preview">${preview}</p>
+      <p class="full" style="display:none;">${article.content}</p>
+      <span class="toggle-btn">▼ Read More</span>
+    `;
+    const toggleBtn = li.querySelector('.toggle-btn');
+    toggleBtn.addEventListener('click', ()=>{
+      const full = li.querySelector('.full');
+      const previewP = li.querySelector('.preview');
+      if(full.style.display === 'none'){
+        full.style.display = 'block';
+        previewP.style.display = 'none';
+        toggleBtn.innerText = '▲ Show Less';
+      } else {
+        full.style.display = 'none';
+        previewP.style.display = 'block';
+        toggleBtn.innerText = '▼ Read More';
+      }
+    });
+    articleList.appendChild(li);
+  }
+   //loop bro
+    function loadNextArticle(){
+    renderArticle(articles[index]);
+    index = (index + 1) % articles.length;
+  }
+  loadNextArticle();
+    window.addEventListener('scroll', ()=>{
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 50){
+      loadNextArticle();
+    }
+  });
+  // Render all articles at once
+  articles.forEach(article => renderArticle(article));
+
+});
+</script>
+</body>
+</html>

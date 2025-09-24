@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog Posts</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="posts.html" class="logo">My Blog</a>
+      <ul class="nav-links">
+        <li><a href="posts.html">Posts</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="registerLink"><a href="register.html">Register</a></li>
+        <li id="logoutLink" style="display:none;"><a href="#" id="logoutBtn">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Blog Posts</h1>
+    <ul id="postList"></ul>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Navbar toggle
+  const token = localStorage.getItem('token');
+  const loginLink = document.getElementById('loginLink');
+  const registerLink = document.getElementById('registerLink');
+  const logoutLink = document.getElementById('logoutLink');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  if(token){
+    loginLink.style.display = 'none';
+    registerLink.style.display = 'none';
+    logoutLink.style.display = 'inline-block';
+  } else {
+    loginLink.style.display = 'inline-block';
+    registerLink.style.display = 'inline-block';
+    logoutLink.style.display = 'none';
+  }
+
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('token');
+    loginLink.style.display = 'inline-block';
+    registerLink.style.display = 'inline-block';
+    logoutLink.style.display = 'none';
+  });
+
+  // Fake posts data
+ const posts = [
+  {_id:'1', title:'Getting Started with MERN Stack', author:{username:'Ankur'}, content:'MERN Stack combines MongoDB, Express, React, and Node.js to build full-stack apps in JavaScript. It is popular for modern web development and rapid prototyping.', comments:[]},
+  {_id:'2', title:'Why Choose MERN Stack?', author:{username:'Shree'}, content:'MERN Stack uses a single language for both frontend and backend, making development seamless. It provides great community support and a lot of ready-made libraries.', comments:[]},
+  {_id:'3', title:'Building Your First MERN App', author:{username:'Rahul'}, content:'Start with Node.js and Express backend, connect to MongoDB, and use React for frontend. You can deploy easily and scale apps quickly.', comments:[]},
+  {_id:'4', title:'Understanding REST APIs', author:{username:'Neha'}, content:'REST APIs allow communication between client and server. Learn about endpoints, HTTP methods, status codes, and how to design efficient APIs for web applications.', comments:[]},
+  {_id:'5', title:'Authentication in MERN', author:{username:'Vikram'}, content:'Implement user authentication in MERN using JWT, bcrypt, and session management. Understand login, registration, and secure routes in your full-stack app.', comments:[]},
+  {_id:'6', title:'State Management with Redux', author:{username:'Priya'}, content:'Redux is a state management tool for React applications. Learn actions, reducers, store, and middleware to manage complex application state effectively.', comments:[]},
+  {_id:'7', title:'Deploying MERN Apps', author:{username:'Amit'}, content:'Deploy MERN applications to cloud platforms like Heroku, AWS, or Netlify. Understand environment variables, build processes, and database connections in production.', comments:[]},
+  {_id:'8', title:'Testing in MERN Stack', author:{username:'Riya'}, content:'Learn how to write unit and integration tests in MERN using Jest and Supertest. Ensure your backend and frontend code is reliable and bug-free.', comments:[]}
+];
+
+
+  const postList = document.getElementById('postList');
+  let index = 0;
+
+  function renderPost(post){
+    const li = document.createElement('li');
+    li.style.marginBottom = '20px';
+    li.innerHTML = `
+      <h3>${post.title}</h3>
+      <p><em>by ${post.author.username}</em></p>
+      <p>${post.content}</p>
+      <h4>Comments</h4>
+      <ul id="comments-${post._id}">
+        ${post.comments.map(c => `<li>${c}</li>`).join('')}
+      </ul>
+      <input type="text" id="comment-${post._id}" placeholder="Add a comment"/>
+      <button onclick="addComment('${post._id}')">Comment</button>
+      <hr/>
+    `;
+    postList.appendChild(li);
+  }
+
+  window.addComment = function(postId){
+    const input = document.getElementById(`comment-${postId}`);
+    if(!input.value.trim()) return;
+    const post = posts.find(p => p._id === postId);
+    post.comments.push(input.value);
+    input.value = '';
+    document.getElementById(`comments-${postId}`).innerHTML = post.comments.map(c => `<li>${c}</li>`).join('');
+  }
+
+  function loadNextPost(){
+    renderPost(posts[index]);
+    index = (index + 1) % posts.length; // loop
+  }
+
+  // Initial posts
+  for(let i = 0; i < 8; i++) loadNextPost();
+
+  // Infinite scroll
+  window.addEventListener('scroll', () => {
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 50){
+      loadNextPost();
+    }
+  });
+
+});
+</script>
+
+
+</body>
+</html>
