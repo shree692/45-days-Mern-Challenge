@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>TaskFlow Dashboard</h1>
+  </header>
+
+  <!-- Dashboard -->
+  <section id="dashboard">
+    <h2>Dashboard</h2>
+    <div class="stats">
+      <div>Total Tasks: <span id="total-tasks">0</span></div>
+      <div>Total Teams: <span id="total-teams">0</span></div>
+    </div>
+  </section>
+
+  <!-- Kanban Board -->
+  <section id="kanban">
+    <h2>Kanban Board</h2>
+    <div class="kanban-columns">
+      <div class="column" data-status="To Do">
+        <h3>To Do</h3>
+        <div class="task-list" id="todo-list"></div>
+      </div>
+      <div class="column" data-status="In Progress">
+        <h3>In Progress</h3>
+        <div class="task-list" id="inprogress-list"></div>
+      </div>
+      <div class="column" data-status="Review">
+        <h3>Review</h3>
+        <div class="task-list" id="review-list"></div>
+      </div>
+      <div class="column" data-status="Done">
+        <h3>Done</h3>
+        <div class="task-list" id="done-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Task Management -->
+  <section id="task-crud">
+    <h2>Task Management</h2>
+    <form id="task-form">
+      <input type="text" id="task-title" placeholder="Task Title" required>
+      <input type="text" id="task-desc" placeholder="Description">
+      <select id="task-priority">
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+      </select>
+      <button type="submit">Add Task</button>
+    </form>
+  </section>
+
+  <!-- Team Management -->
+  <section id="team-crud">
+    <h2>Team Management</h2>
+    <form id="team-form">
+      <input type="text" id="team-name" placeholder="Team Name" required>
+      <button type="submit">Add Team</button>
+    </form>
+    <ul id="team-list"></ul>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
