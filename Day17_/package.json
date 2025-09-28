@@ -1,0 +1,22 @@
+{
+  "name": "day17_",
+  "version": "1.0.0",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test":" jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "jest": "^30.2.0",
+    "superset": "^2.0.1",
+    "supertest": "^7.1.4"
+  }
+}
