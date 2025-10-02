@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Project Cards — Resume Portfolio (React CDN)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1: #0f1724; 
+      --bg-2: #2b2f6b; 
+      --accent-start: #667eea;
+      --accent-end: #764ba2;
+      --card-bg: rgba(255,255,255,0.06);
+      --glass-blur: 10px;
+      --text-primary: #eef2ff;
+      --muted: #c7d2fe;
+      --btn-focus: 0 0 0 4px rgba(118,75,162,0.18);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+      color:var(--text-primary);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .wrapper{
+      width:100%;
+      max-width:1200px;
+    }
+
+    header.page-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+    .page-title{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .page-title h1{
+      margin:0;
+      font-size:1.25rem;
+      letter-spacing:0.2px;
+    }
+    .page-sub{
+      color:var(--muted);
+      font-size:0.95rem;
+      margin:0;
+    }
+
+  .cards {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 12px;
+}
+    @media (max-width:980px){
+      .cards{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width:640px){
+      .cards{grid-template-columns: 1fr}
+      body{padding:32px 12px}
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .project-card {
+  flex: 0 0 300px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 18px;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: 0 8px 24px rgba(2,6,23,0.6);
+  transition: transform .32s cubic-bezier(.2,.9,.28,1), box-shadow .32s ease;
+  animation: fadeInUp .6s ease both;
+
+  overflow-y: hidden;  
+  overflow-x: hidden;   
+
+}
+
+.project-card p {
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+
+    .project-card:hover{
+      transform: scale(1.12); 
+  box-shadow: 0 24px 60px rgba(2,6,23,0.7); 
+      
+    }
+
+    .project-card::after{
+      content:"";
+      position:absolute;
+      pointer-events:none;
+      inset:-30% -20% auto -20%;
+      height:50%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.03), rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      transform: rotate(12deg);
+      transition:opacity .4s;
+      opacity:0;
+      
+    }
+    .project-card:hover::after{opacity:1}
+
+    .card-top{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .project-thumb{
+      width:72px;
+      height:72px;
+      border-radius:10px;
+      flex:0 0 72px;
+      background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-size:1.05rem;
+      box-shadow:0 6px 18px rgba(102,126,234,0.12);
+      overflow:hidden;
+    }
+    .project-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .meta{
+      flex:1;
+    }
+    .meta h3{
+      margin:0;
+      font-size:1.05rem;
+      font-weight:700;
+      color:var(--text-primary);
+    }
+    .meta .muted{
+      color:var(--muted);
+      margin-top:6px;
+      font-size:0.92rem;
+    }
+
+    .desc{
+      margin:12px 0 16px;
+      color: #e6e9ff;
+      font-size:0.975rem;
+      line-height:1.45;
+      white-space: pre-line; 
+    }
+
+    .tech-list{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .tech{
+      background:rgba(255,255,255,0.04);
+      color:var(--muted);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:0.82rem;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .card-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      background:linear-gradient(90deg,var(--accent-start),var(--accent-end));
+      color:white;
+      border:none;
+      padding:8px 12px;
+      border-radius:10px;
+      font-weight:600;
+      font-size:0.92rem;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      cursor:pointer;
+      text-decoration:none;
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s;
+    }
+    .btn:focus{outline:none;box-shadow:var(--btn-focus)}
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--text-primary);
+      opacity:0.95;
+    }
+    .btn:hover{transform:translateY(-3px)}
+
+    .icon{
+      width:16px;height:16px;display:inline-block;flex:0 0 16px;
+    }
+
+    .project-card a:focus, .project-card button:focus{
+      outline:none;
+      box-shadow: var(--btn-focus);
+      border-radius:8px;
+    }
+
+    .footnote{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:0.85rem;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="page-head" aria-hidden="false">
+      <div class="page-title">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="6" fill="url(#g)"></rect>
+          <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#667eea"/><stop offset="1" stop-color="#764ba2"/></linearGradient></defs>
+        </svg>
+        <div>
+          <h1>Work Space</h1>Your ultimate work space</p>
+        </div>
+      </div>
+          <p class="page-sub">
+    </header>
+
+    <main id="root"></main>
+
+    <p class="footnote">Tip: hover any card — the lift, shine and buttons show interactivity suitable for portfolio highlights.</p>
+  </div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    function ProjectCard({ title, description, image, tech = [], github, live }) {
+    
+      const initials = title.split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
+
+      return (
+        <article className="project-card" role="article" aria-labelledby={title.replace(/\s+/g,'-')}>
+          <div className="card-top">
+            <div className="project-thumb" aria-hidden={image ? "false" : "true"}>
+              {image ? <img src={image} alt={`${title} screenshot`} /> : <span aria-hidden="true">{initials}</span>}
+            </div>
+
+            <div className="meta">
+              <h3 id={title.replace(/\s+/g,'-')}>{title}</h3>
+              <div className="muted">{tech.length ? tech.join(' • ') : 'Frontend / React'}</div>
+            </div>
+          </div>
+
+          <div className="desc">{description}</div>
+
+          <div className="tech-list" aria-hidden={tech.length ? "false" : "true"}>
+            {tech.map((t, i) => <span key={i} className="tech">{t}</span>)}
+          </div>
+
+
+        </article>
+      );
+    }
+
+    function App(){
+      const projects = [
+        {
+          title: "Blog Platform",
+          description: "A full-stack MERN blogging app with authentication, comments, search and user profiles.\nFeatures: JWT auth, RESTful APIs, image uploads, and rich text editor.",
+          image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=60",
+          tech: ["React","Node.js","Express","MongoDB"],
+          github: "https://github.com/your-username/blog-platform",
+          live: ""
+        },
+        {
+          title: "Weather Forecast App",
+          description: "Real-time weather dashboard using OpenWeather API.\nDisplays hourly forecasts, location search, and responsive UI.",
+          image: "https://images.unsplash.com/photo-1501973801540-537f08ccae7b?auto=format&fit=crop&w=800&q=60",
+          tech: ["React","API","Responsive"],
+          github: "https://github.com/your-username/weather-app",
+          live: "https://your-live-weather-app.example"
+        },
+        {
+          title: "StyleIcon",
+          description: "E-commerce style frontend built with React. \nIncludes product gallery, filtering, and a simulated checkout flow.",
+          image: "",
+          tech: ["React","CSS","UX"],
+          github: "",
+          live: ""
+        },
+        {
+          title: "Portfolio Website",
+          description: "Personal portfolio with animated sections, project highlights, and contact form.\nDesigned for recruiters — fast, accessible and mobile-friendly.",
+          image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=60",
+          tech: ["HTML","CSS","React"],
+          github: "https://github.com/your-username/portfolio-website",
+          live: "https://your-portfolio.example"
+        }
+      ];
+
+      return (
+        <section className="cards" role="list">
+          {projects.map((p, idx) => (
+            <div role="listitem" key={idx}>
+              <ProjectCard
+                title={p.title}
+                description={p.description}
+                image={p.image}
+                tech={p.tech}
+            
+              />
+            </div>
+          ))}
+        </section>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
