@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React Classy Header</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+  function Header() {
+    const name = "Shriyanshi Dangwal";
+    const title = "Aspiring Software Engineer";
+    const bio = "Passionate about coding, learning \n new technologies, and building impactful projects.";
+    const profilePic = "https://i.pravatar.cc/200?img=47"; 
+    const bgImage = "https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1500&q=80"; 
+
+    const containerStyle = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "100vh",
+      backgroundImage: `url(${bgImage})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    };
+
+    const cardStyle = {
+      backgroundColor: "rgba(0,0,0,0.6)",  // faded black box
+      borderRadius: "15px",
+      padding: "30px 40px",
+      textAlign: "center",
+      color: "#fff",
+      maxWidth: "600px",
+      animation: "fadeInUp 1s ease-out",
+    };
+
+  
+    const nameStyle = {
+      fontSize: "2rem",
+      fontWeight: "700",
+      margin: "10px 0",
+    };
+
+    const titleStyle = {
+      fontSize: "1.3rem",
+      fontWeight: "500",
+      margin: "5px 0 15px 0",
+      fontStyle: "italic",
+    };
+
+    const bioStyle = {
+      fontSize: "1rem",
+      lineHeight: "1.6",
+      whiteSpace: "pre-line", // 👈 ab \n kaam karega
+    };
+
+    return (
+      <div style={containerStyle}>
+        <div style={cardStyle}>
+          <h1 style={nameStyle}>{name}</h1>
+          <h2 style={titleStyle}>{title}</h2>
+          <p style={bioStyle}>{bio}</p>
+        </div>
+      </div>
+    );
+  }
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<Header />);
+</script>
+</body>
+</html>
