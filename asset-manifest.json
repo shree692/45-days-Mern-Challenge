@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/45-days-Mern-Challenge/static/css/main.943738f6.css",
+    "main.js": "/45-days-Mern-Challenge/static/js/main.ab8e756f.js",
+    "index.html": "/45-days-Mern-Challenge/index.html",
+    "main.943738f6.css.map": "/45-days-Mern-Challenge/static/css/main.943738f6.css.map",
+    "main.ab8e756f.js.map": "/45-days-Mern-Challenge/static/js/main.ab8e756f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.943738f6.css",
+    "static/js/main.ab8e756f.js"
+  ]
+}
